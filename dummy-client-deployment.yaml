@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-client
+  labels:
+    app: dummy-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy-client
+  template:
+    metadata:
+      labels:
+        app: dummy-client
+    spec:
+      containers:
+      - name: dummy-client
+        image: letsdotech/dummy-client:v1.0.5
+        env:
+        - name: CALCULATOR_SERVICE_URL
+          value: "http://calculator-server:80"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m" 
